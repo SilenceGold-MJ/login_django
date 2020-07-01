@@ -44,48 +44,35 @@ def index(request):
     # return HttpResponse('ok')
     return render(request, "index.html", {"n": ret})
 
-def search2(request):
-    if request.method == 'POST' and request.POST.get("user") =='搜索':
-        print(request.POST)
+def register(request):
+    if request.method == 'POST':
+        if  "user" in request.POST and "pwd" in request.POST :
+            logger.info(request.POST)
+            username = request.POST.get("user")
+            password = request.POST.get("pwd")
+            data = API().Registered(username,password)
+            logger.info('请求接口')
+            logger.info(data)
+            if data['result_code'] == '0000':
+                logger.info('验证通过')
+                # return render(request, 'index.html')
+                return render(request, '表格.html', {"dic": data})
+            else:
+                logger.info('验证不通过')
+                # return render(request, "login.html")
+                return render(request, '表格.html', {"dic": data})
 
-        username = request.POST.get("user")
-        data = API().check_user(username)
-        logger.info('请求接口')
-        logger.info(data)
-        if data['result_code'] =='0000':
-            logger.info('验证通过')
-            #return render(request, 'index.html')
-            return render(request,'查询结果.html',{"dic":data})
-        else:
-            logger.info('验证不通过')
-            #return render(request, "login.html")
-            return render(request,'查询结果.html',{"dic":data})
-    elif request.method == 'POST' and 'alluser' in request.POST:
-        print(request.POST)
-    #if request.method == "POST":
-        username = request.POST.get("alluser")
-        data = API().getalluser(username)
-        logger.info('请求接口')
-        logger.info(data)
-        if data['result_code'] =='0000':
-            logger.info('验证通过')
-            #return render(request, 'index.html')
-            return render(request,'查询结果.html',{"dic":data})
-        else:
-            logger.info('验证不通过')
-            #return render(request, "login.html")
-            return render(request,'查询结果.html',{"dic":data})
 
     # 3.跳转页面
     # return HttpResponse('ok')
-    logger.info('打开sousuo.html')
-    return render(request, "搜索.html")
+    logger.info('register.html')
+    return render(request, "register.html")
+
 
 def search(request):
     if request.method == 'POST':
-
         if  "user" in request.POST:
-            print(request.POST)
+            logger.info(request.POST)
             username = request.POST.get("user")
             data = API().check_user(username)
             logger.info('请求接口')
@@ -98,10 +85,8 @@ def search(request):
                 logger.info('验证不通过')
                 # return render(request, "login.html")
                 return render(request, '查询结果.html', {"dic": data})
-
         elif 'alluser' in request.POST:
-
-            print(request.POST)
+            logger.info(request.POST)
             # if request.method == "POST":
             username = request.POST.get("alluser")
             data = API().getalluser(username)
@@ -116,9 +101,8 @@ def search(request):
                 # return render(request, "login.html")
                 return render(request, '查询结果.html', {"dic": data})
 
-
-
     # 3.跳转页面
     # return HttpResponse('ok')
     logger.info('打开sousuo.html')
     return render(request, "搜索.html")
+

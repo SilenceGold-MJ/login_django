@@ -29,7 +29,14 @@ class API():
         response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
         data = json.loads(response.text)
         return data
+    def Registered(self,username,password):
 
-# username,password='huangpeng','123456'
-# data=API().login_api(username,password)
+        url = "%s:%s/Registered"%(address,port)
+        payload = {"user_name": username, "pwd": password}
+        headers = {'Content-Type': 'application/json'}
+        response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+        data = json.loads(response.text)
+        return data
+# username,password='huangpeng7','123456'
+# data=API().Registered(username,password)
 # print(data)
