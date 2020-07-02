@@ -370,7 +370,7 @@ input[type="submit"], button {
     }
 
     form .form-row p.datetime {
-        width: 100%;
+        width: 50%;
     }
 
     .datetime input {
