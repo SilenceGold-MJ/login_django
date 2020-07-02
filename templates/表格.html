@@ -5,7 +5,11 @@
 		<title></title>
 		<style type="text/css">
 			/*表格样式*/
-
+            body{
+   margin: 0;
+    padding: 0;
+    background: #f8f8f8;
+}
 
 			table {
 				width: 90%;
@@ -37,51 +41,34 @@
 				color: #06f;
 				text-decoration: underline;
 			}
-
 		</style>
 	</head>
-
 	<body>
-
-    <li><a href="http://127.0.0.1:8000/search.html" data-val="blue" title="返回" target="_parent">返回</a></li>
-
-
-
-
-
-
+    <li><a href="register.html" data-val="blue" title="添加新用户" target="_parent">添加新用户</a></li>
 		<table>
 						<tr>
-
 				<!-- th为表格标题栏-->
-
-				<th>序号</th>
-
-				<th>名称</th>
-
-				<th>密码</th>
-
+                            {% for key,value in dic.datalist.0.items %}
+				            <th>{{ key }}</th>
+                            {% endfor %}
+                            <th>查看</th>
+                            <th>修改</th>
 			</tr>
+        <tr>
+        {% for i in dic.datalist %}
 			<tr>
-                {% for i in dic.datalist %}
-                    <tr>
-                <td>{{ i.ID }}</td>
+                        {% for key,value in i.items %}
+                            <td>{{ value }}</td>
 
-				<td>{{ i.user_name }}</td>
+                             {% endfor %}
+                            <td><a href="#">查看</a></td>
+                            <td><a href="Updatainfo.html?username={{i.user_name}}">修改</a></td>
 
-				<td>{{ i.pwd }}</td>
-                    </tr>
-
-
-
-
-                        {% endfor %}
-
-
-			</tr>
-
+                </tr>
+        {% endfor %}
+        </tr>
 		</table>
-        <li><a href="register.html" data-val="blue" title="添加新用户" target="_parent">添加新用户</a></li>
+        <li><a href="search.html" data-val="blue" title="返回" target="_parent">返回</a></li>
         <p>{{dic.message}}</p>
 	</body>
 

@@ -80,11 +80,11 @@ def search(request):
             if data['result_code'] == '0000':
                 logger.info('验证通过')
                 # return render(request, 'index.html')
-                return render(request, '查询结果.html', {"dic": data})
+                return render(request, '表格.html', {"dic": data})
             else:
                 logger.info('验证不通过')
                 # return render(request, "login.html")
-                return render(request, '查询结果.html', {"dic": data})
+                return render(request, '表格.html', {"dic": data})
         elif 'alluser' in request.POST:
             logger.info(request.POST)
             # if request.method == "POST":
@@ -99,10 +99,45 @@ def search(request):
             else:
                 logger.info('验证不通过')
                 # return render(request, "login.html")
-                return render(request, '查询结果.html', {"dic": data})
+                return render(request, '表格.html', {"dic": data})
 
     # 3.跳转页面
     # return HttpResponse('ok')
     logger.info('打开sousuo.html')
     return render(request, "搜索.html")
+
+def Updatainfo(request):
+
+    if request.method == 'POST':
+        if  "nickname" in request.POST:
+            logger.info(request.POST)
+            dic={
+            'username' : request.POST.get("user"),
+            'pwd' : request.POST.get("pwd"),
+            'realname' : request.POST.get("realname"),
+            'nickname' : request.POST.get("nickname"),
+            'gender' : request.POST.get("gender"),
+            'email' : request.POST.get("email"),
+            'mobile' : request.POST.get("mobile"),
+            'deleted' : request.POST.get("deleted"),
+            'head' : request.POST.get("head"),
+
+            }
+            logger.info(dic)
+            data = API().updata_info( dic)
+            logger.info('请求接口')
+            logger.info(data)
+            if data['result_code'] == '0000':
+                logger.info('验证通过')
+                # return render(request, 'index.html')
+                return render(request, '表格.html', {"dic": data})
+            else:
+                logger.info('验证不通过')
+                # return render(request, "login.html")
+                return render(request, '表格.html', {"dic": data})
+
+    # 3.跳转页面
+    # return HttpResponse('ok')
+    logger.info('打开Updatainfo.html')
+    return render(request, "Updatainfo.html")
 

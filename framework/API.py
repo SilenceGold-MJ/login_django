@@ -37,6 +37,35 @@ class API():
         response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
         data = json.loads(response.text)
         return data
+
+    def Updatapwd(self,username,password):
+        url = "%s:%s/Updatapwd"%(address,port)
+        payload = {"user_name": username, "pwd": password}
+        headers = {'Content-Type': 'application/json'}
+        response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+        data = json.loads(response.text)
+        return data
+    def updata_info(self,dic):
+        url = "%s:%s/updata_info"%(address,port)
+        payload = dic
+        headers = {'Content-Type': 'application/json'}
+        response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+        data = json.loads(response.text)
+        return data
+
+
+
+
 # username,password='huangpeng7','123456'
-# data=API().Registered(username,password)
+# dic={
+#      'user_name':'huangpeng2',
+#      'pwd': '1',
+#      'realname': '阿萨德',
+#      'nickname': 'ad',
+#      'gender': '男',
+#      'email': '',
+#      'mobile': '',
+#      'deleted': '0',
+#      'head': 'ashdk'}
+# data=API().updata_info(dic)
 # print(data)
