@@ -29,10 +29,10 @@ class API():
         response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
         data = json.loads(response.text)
         return data
-    def Registered(self,username,password):
+    def Registered(self,dic):
 
         url = "%s:%s/Registered"%(address,port)
-        payload = {"user_name": username, "pwd": password}
+        payload =dic
         headers = {'Content-Type': 'application/json'}
         response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
         data = json.loads(response.text)
@@ -53,10 +53,19 @@ class API():
         data = json.loads(response.text)
         return data
 
+    def get_user(self,username):
+        url = "%s:%s/getuser"%(address,port)
+        payload = {
+            'username':username
+        }
+        headers = {}
+        response = requests.request("GET", url, headers=headers, params=(payload))
+        data = json.loads(response.text)
+        return data
 
 
 
-# username,password='huangpeng7','123456'
+# username,password='huangpeng24','123456'
 # dic={
 #      'user_name':'huangpeng2',
 #      'pwd': '1',
@@ -67,5 +76,5 @@ class API():
 #      'mobile': '',
 #      'deleted': '0',
 #      'head': 'ashdk'}
-# data=API().updata_info(dic)
+# data=API().get_user(username)
 # print(data)

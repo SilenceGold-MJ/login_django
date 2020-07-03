@@ -775,7 +775,9 @@ table#change-history tbody th {
     min-width: 980px;
     padding: 0;
 }
-
+ p{
+        display:inline;
+    }
 #content {
     padding: 20px 40px;
 }

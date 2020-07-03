@@ -42,7 +42,9 @@ body.login {
     width: 100%;
     border-bottom: none;
 }
-
+ p{
+        display:inline;
+    }
 .login .form-row label {
     padding-right: 0.5em;
     line-height: 2em;

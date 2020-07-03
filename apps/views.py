@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
+import json
 from django.shortcuts import render, HttpResponse, redirect
 from framework.API import API
 from framework.logger import Logger
@@ -48,9 +49,21 @@ def register(request):
     if request.method == 'POST':
         if  "user" in request.POST and "pwd" in request.POST :
             logger.info(request.POST)
-            username = request.POST.get("user")
-            password = request.POST.get("pwd")
-            data = API().Registered(username,password)
+            # username = request.POST.get("user")
+            # password = request.POST.get("pwd")
+            dic={
+            'username' : request.POST.get("user"),
+            'pwd' : request.POST.get("pwd"),
+            'realname' : request.POST.get("realname"),
+            'nickname' : request.POST.get("nickname"),
+            'gender' : request.POST.get("gender"),
+            'email' : request.POST.get("email"),
+            'mobile' : request.POST.get("mobile"),
+            'deleted' : request.POST.get("deleted"),
+            'head' : request.POST.get("head"),
+
+            }
+            data = API().Registered(dic)
             logger.info('请求接口')
             logger.info(data)
             if data['result_code'] == '0000':
@@ -95,7 +108,7 @@ def search(request):
             if data['result_code'] == '0000':
                 logger.info('验证通过')
                 # return render(request, 'index.html')
-                return render(request, '表格.html', {"dic": data})
+                return render(request, '表格.html', {"dic": (data)})
             else:
                 logger.info('验证不通过')
                 # return render(request, "login.html")
@@ -140,4 +153,10 @@ def Updatainfo(request):
     # return HttpResponse('ok')
     logger.info('打开Updatainfo.html')
     return render(request, "Updatainfo.html")
+
+def Seeinfo(request):
+    # 3.跳转页面
+    # return HttpResponse('ok')
+    logger.info('打开查看.html')
+    return render(request, "查看.html")
 
