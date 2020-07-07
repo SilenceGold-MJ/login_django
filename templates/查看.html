@@ -52,6 +52,9 @@
 
 <body>
 <table>
+<div align="center"  class="form-row"> <img  id = "head" src="" alt="Pulpit rock" width="304" height="304">
+
+    </div>
 
 <div align="center"  class="form-row"><p>用户名：</p> <p id="username">
 
@@ -76,9 +79,7 @@
     </div>
 
     </div>
-<div align="center"  class="form-row"><p>头像：</p> <p id="head">
 
-    </div>
 
 <script>
 function getQueryStrings() {
@@ -104,7 +105,10 @@ document.getElementById("nickname").innerHTML =json_x[4].split(":")[1].replace("
 document.getElementById("gender").innerHTML =json_x[5].split(":")[1].replace("'", "").replace("'", "") ;
 document.getElementById("email").innerHTML =json_x[6].split(":")[1].replace("'", "").replace("'", "") ;
 document.getElementById("mobile").innerHTML =json_x[7].split(":")[1].replace("'", "").replace("'", "") ;
-document.getElementById("head").innerHTML =json_x[9].split(":")[1].replace("'", "").replace("'", "").replace("}", "") ;
+document.getElementById("head").src =json_x[9].split(":")[1].replace("'", "").replace("'", "").replace("}", "") ;
+
+
+
 
 </script>
 		</table>

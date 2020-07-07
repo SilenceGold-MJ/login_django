@@ -10,5 +10,8 @@ urlpatterns = [
     path('search.html',views.search),
     path('register.html',views.register),
     path('Updatainfo.html',views.Updatainfo),
-path('查看.html',views.Seeinfo)
+path('查看.html',views.Seeinfo),
+path('查看图片.html',views.imagelist),
+path('上传.html',views.upload),
+
 ]
